@@ -1,0 +1,37 @@
+{
+  "name": "jwt-api",
+  "version": "1.0.0",
+  "description": "RESTful API Authentication using JWT",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env LOG_LEVEL=debug NODE_ENV=development nodemon | pino-pretty",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kosmolet/jwt-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kosmolet/jwt-api/issues"
+  },
+  "homepage": "https://github.com/kosmolet/jwt-api#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-pino-logger": "^5.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.8",
+    "pino": "^6.8.0",
+    "pino-http": "^5.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6",
+    "pino-pretty": "^4.3.0"
+  }
+}
