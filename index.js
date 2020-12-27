@@ -5,4 +5,4 @@ const PORT = process.env.PORT || 5090;
 
 connectToDB();
 
-app.listen(PORT, () => logger.debug(`Running on Port ${PORT}`));
+app.listen(PORT, () => logger.debug(`Running on http://localhost:${PORT}`));
