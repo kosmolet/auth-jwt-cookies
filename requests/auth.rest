@@ -1,0 +1,49 @@
+@BASE_URL=http://localhost:{{$dotenv PORT}}/api/v1
+@USER_ID=12345
+### POST register:
+POST {{BASE_URL}}/auth/register
+content-type: application/json
+
+{
+    "username": "Zybr",
+    "email": "zybr01@gmail.com",
+    "password": "veryStrongPassword"
+}
+
+### POST login:
+POST {{BASE_URL}}/auth/login
+content-type: application/json
+
+{
+    "username": "Zybr",
+    "email": "zybr01@gmail.com",
+    "password": "veryStrongPassword"
+}
+
+
+#### Get ALL:
+GET {{BASE_URL}}/auth/users
+
+### GET by :id: 
+GET {{BASE_URL}}/auth/users/{{USER_ID}}
+
+### PUT by :id:
+PUT {{BASE_URL}}/auth/users/{{USER_ID}}
+content-type: application/json
+
+{
+    "username": "Zybr",
+    "email": "zybr3@gmail.com",
+    "password": "veryStrongPassword"
+}
+
+### PATCH by :id:
+PATCH {{BASE_URL}}/auth/users/{{USER_ID}}
+content-type: application/json
+
+{
+    "username": "Zybr"
+}
+
+### 5. DELETE by :id  
+DELETE {{BASE_URL}}/auth/users/{{USER_ID}}
