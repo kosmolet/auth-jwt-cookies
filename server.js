@@ -15,8 +15,8 @@ if (["development", "production"].includes(process.env.NODE_ENV)) {
 app.use(express.json({ limit: "50mb" }));
 app.use(cors());
 
-// const auth = require("./routes/auth");
-// const events = require("./routes/events");
+const auth = require("./routes/auth");
+const events = require("./routes/events");
 
 app.get("/", (req, res) => {
   res.json({
@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
   });
 });
 
-// app.use("/api/v1/auth", auth);
-// app.use("/api/v1/events", events);
+app.use("/api/v1/auth", auth);
+app.use("/api/v1/events", events);
 
 module.exports = app;
