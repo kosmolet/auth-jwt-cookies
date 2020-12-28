@@ -26,15 +26,16 @@ router.get("/", isAuthenticated, async (req, res) => {
     const events = await Event.find();
     res.status(200).json({ events });
   } catch (err) {
-    return res.status(500).json({ success: false, message: err.message });
+    return res.status(500).json({ error: err.message });
   }
 });
 
 router.get("/:id", isAuthenticated, async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
+    res.status(200).json({ event });
   } catch (err) {
-    return res.status(500).json({ success: false, message: err.message });
+    return res.status(500).json({ error: err.message });
   }
 });
 
@@ -52,7 +53,7 @@ router.post("/", isAuthenticated, async (req, res) => {
 
     res.status(201).json({ event: newEvent });
   } catch (err) {
-    return res.status(500).json({ success: false, message: err.message });
+    return res.status(500).json({ success: false, error: err.message });
   }
 });
 
@@ -72,7 +73,7 @@ router.put("/:id", isAuthenticated, async (req, res) => {
   res.status(201).json({ event });
   try {
   } catch (err) {
-    return res.status(500).json({ success: false, message: err.message });
+    return res.status(500).json({ success: false, error: err.message });
   }
 });
 
@@ -81,7 +82,7 @@ router.delete("/:id", isAuthenticated, async (req, res) => {
     await Event.findByIdAndRemove(req.params.id);
     res.status(200).json({ message: "Event was removed" });
   } catch (err) {
-    return res.status(500).json({ success: false, message: err.message });
+    return res.status(500).json({ success: false, error: err.message });
   }
 });
 

@@ -2,16 +2,20 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 
 module.exports = (req, res, next) => {
-  const authHeader = req.header("Authorization");
+  if (req.method === "OPTIONS") {
+    return next();
+  }
+  const bearerHeader = req.headers["authorization"];
 
-  if (!authHeader) {
+  if (!bearerHeader) {
     return res.status(401).json({
       error: "Unauthorized, Access Denied",
     });
   }
+  const bearerToken = bearerHeader.split(" ")[1];
 
   try {
-    const decodedToken = jwt.verify(authHeader, JWT_SECRET);
+    const decodedToken = jwt.verify(bearerToken, JWT_SECRET);
     req.userId = decodedToken.user._id;
 
     next();
