@@ -1,0 +1,73 @@
+@TOKEN=MAKE_LOGIN_POST_COPY_TOKEN_FROM_RESPONSE_AND_PASTE_HERE
+@BASE_URL=http://localhost:{{$dotenv PORT}}/api/v1
+@EVENT_ID=EVENT_ID_SHOULD_BE_HERE
+
+##########  AUTHORIZED  ############
+
+#### Get ALL not_auth:
+GET {{BASE_URL}}/events
+
+### GET all auth
+GET {{BASE_URL}}/events
+Authorization:  {{TOKEN}}
+
+### POST
+POST {{BASE_URL}}/events
+Authorization:  {{TOKEN}}
+content-type: application/json
+
+{
+    "title": "Zybr title",
+    "description": "zybr01 desc",
+    "date": "2020-10-23"
+}
+
+### GET by :id
+GET {{BASE_URL}}/events/{{EVENT_ID}}
+Authorization:  {{TOKEN}}
+
+
+### PUT by :id
+PUT {{BASE_URL}}/events/{{EVENT_ID}}
+Authorization:  {{TOKEN}}
+content-type: application/json
+
+{
+    "title": "Zybr title",
+    "description": "zybr01 desc",
+    "date": "2020-10-23"
+}
+
+### DELETE by :id
+DELETE {{BASE_URL}}/events/{{EVENT_ID}}
+Authorization:  {{TOKEN}}
+
+
+##########  NOT AUTHORIZED  ############
+
+### POST
+POST {{BASE_URL}}/events
+content-type: application/json
+
+{
+    "title": "Zybr title",
+    "description": "zybr01 desc",
+    "date": "2020-10-23"
+}
+
+### GET by :id
+GET {{BASE_URL}}/events/{{EVENT_ID}}
+
+### PUT by :id
+PUT {{BASE_URL}}/events/{{EVENT_ID}}
+content-type: application/json
+
+{
+    "title": "Zybr title",
+    "description": "zybr01 desc",
+    "date": "2020-10-23"
+}
+ 
+### DELETE by :id
+DELETE {{BASE_URL}}/events/{{EVENT_ID}}
+ 
