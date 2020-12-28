@@ -17,7 +17,6 @@ router.post("/login", async (req, res) => {
     }
 
     const isPasswordMatch = await bcrypt.compare(password, user.password);
-
     if (!isPasswordMatch) {
       return res.status(400).json({ erorr: "Email or password are invalid" });
     }
@@ -34,7 +33,7 @@ router.post("/login", async (req, res) => {
 
     res.status(200).json({ token, payload });
   } catch (err) {
-    return res.status(500).json({ message: err.message });
+    return res.status(500).json({ success: false, message: err.message });
   }
 });
 
@@ -43,7 +42,6 @@ router.post("/register", async (req, res) => {
 
   try {
     let user = await User.findOne({ email });
-
     if (user) {
       return res
         .status(400)
@@ -69,7 +67,7 @@ router.post("/register", async (req, res) => {
 
     res.status(201).json({ token, payload });
   } catch (err) {
-    return res.status(500).json({ message: err.message });
+    return res.status(500).json({ success: false, message: err.message });
   }
 });
 

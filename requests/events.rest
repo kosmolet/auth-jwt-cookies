@@ -4,10 +4,7 @@
 
 ##########  AUTHORIZED  ############
 
-#### Get ALL not_auth:
-GET {{BASE_URL}}/events
-
-### GET all auth
+### GET all
 GET {{BASE_URL}}/events
 Authorization:  {{TOKEN}}
 
@@ -44,6 +41,9 @@ Authorization:  {{TOKEN}}
 
 
 ##########  NOT AUTHORIZED  ############
+
+#### Get ALL
+GET {{BASE_URL}}/events
 
 ### POST
 POST {{BASE_URL}}/events
