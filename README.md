@@ -1,2 +1,1 @@
-# jwt-api
-RESTful API Authentication using JWT 
+# Authentication using JWT 
