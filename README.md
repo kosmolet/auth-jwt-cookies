@@ -1,6 +1,6 @@
 # Authentication using JWT 
 
-### Set up:
+### Set up
 `.env` file should be created in the root directory, example:    
  `NODE_ENV=development`  
 `PORT=5091`  
