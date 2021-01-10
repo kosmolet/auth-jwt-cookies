@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
 
   try {
     const decodedToken = jwt.verify(bearerToken, JWT_SECRET);
-    req.userId = decodedToken.user._id;
+    req.userId = decodedToken._id;
 
     next();
   } catch (err) {
