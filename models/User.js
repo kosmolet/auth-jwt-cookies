@@ -48,7 +48,14 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-schema.methods.validatePassword = async function validatePassword(data) {
+userSchema.methods.validatePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
+
+userSchema.methods.getSignedJwtToken = function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE,
+  });
+};
+
 module.exports = mongoose.model("User", userSchema);

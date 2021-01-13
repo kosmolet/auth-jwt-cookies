@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 const pino = require("pino");
 const expressLogger = require("express-pino-logger");
 
@@ -24,7 +24,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/auth", require("./routes/auth"));
-app.use("/api/v1/user", require("./routes/user"));
- 
+// app.use("/api/v1/user", require("./routes/user"));
 
 module.exports = app;

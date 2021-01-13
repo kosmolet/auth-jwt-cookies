@@ -1,25 +1,25 @@
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = process.env;
-
-module.exports = (req, res, next) => {
-  if (req.method === "OPTIONS") {
-    return next();
-  }
-  const bearerHeader = req.headers["authorization"];
-
-  if (!bearerHeader) {
-    return res.status(401).json({
-      error: "Unauthorized, Access Denied",
-    });
-  }
-  const bearerToken = bearerHeader.split(" ")[1];
+const User = require('../models/User');
+ 
+const verifyToken = (req, res, next) => {
+  const token = req.cookies.jwt;
 
   try {
-    const decodedToken = jwt.verify(bearerToken, JWT_SECRET);
-    req.userId = decodedToken._id;
-
+    if (!token) {
+      return res.status(401).json({
+        error: "Unauthorized, Access Denied",
+      });
+    }
+    
+    const decrypt = await jwt.verify(token, process.env.JWT_SECRET);
+    req.user = {
+      id: decrypt.id,
+      email: decrypt.email,
+    };
     next();
   } catch (err) {
     res.status(401).json({ error: "Unauthorized, Access Denied" });
   }
 };
+
+module.exports = verifyToken;
