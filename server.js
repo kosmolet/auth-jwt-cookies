@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require('cookie-parser');
 const pino = require("pino");
 const expressLogger = require("express-pino-logger");
 
@@ -12,19 +13,18 @@ if (["development", "production"].includes(process.env.NODE_ENV)) {
   app.use(expressLogger({ logger }));
 }
 
-app.use(express.json({ limit: "50mb" }));
 app.use(cors());
-
-const auth = require("./routes/auth");
-const events = require("./routes/events");
+app.use(express.json());
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.json({
-    message: "api works",
+    message: "API is working",
   });
 });
 
-app.use("/api/v1/auth", auth);
-app.use("/api/v1/events", events);
+app.use("/api/v1/auth", require("./routes/auth"));
+app.use("/api/v1/user", require("./routes/user"));
+ 
 
 module.exports = app;

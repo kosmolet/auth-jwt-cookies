@@ -1,8 +1,9 @@
-const connectToDB = require("./config/database");
+require("dotenv").config();
+const connectDB = require("./config/database");
 const app = require("./server");
 
-const PORT = process.env.PORT || 5090;
+const PORT = process.env.PORT || 5001;
 
-connectToDB();
+connectDB();
 
-app.listen(PORT, () => logger.debug(`Running on http://localhost:${PORT}`));
+app.listen(PORT, () => logger.debug(`Running on ${PORT} port`));
