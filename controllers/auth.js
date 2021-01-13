@@ -62,7 +62,7 @@ exports.login = async (req, res) => {
 
     const token = user.getSignedJwtToken();
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(200).json({ success: true, token, user });
+    res.status(200).json({ success: true, user });
   } catch (err) {
     return res.status(500).json({ success: false, error: err.message });
   }
