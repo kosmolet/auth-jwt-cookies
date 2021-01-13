@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
-const User = require('../models/User');
- 
-const verifyToken = (req, res, next) => {
+
+const verifyToken = async (req, res, next) => {
   const token = req.cookies.jwt;
 
   try {
@@ -10,11 +9,11 @@ const verifyToken = (req, res, next) => {
         error: "Unauthorized, Access Denied",
       });
     }
-    
+
     const decrypt = await jwt.verify(token, process.env.JWT_SECRET);
+
     req.user = {
       id: decrypt.id,
-      email: decrypt.email,
     };
     next();
   } catch (err) {

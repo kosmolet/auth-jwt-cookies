@@ -2,7 +2,7 @@ const User = require("../models/User");
 
 exports.getUser = async (req, res) => {
   try {
-    const user = await User.findById(req.userId);
+    const user = await User.findById(req.user.id);
     if (user) {
       res.status(200).json({
         success: true,
