@@ -1,4 +1,4 @@
-# Authentication using JWT 
+# Authentication using JWT + HttpOnly Cookies, Node.js + React client
 
 ### Set up
 `.env` file should be created in the root directory, example:    
