@@ -1,24 +1,27 @@
-import React, { useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { authContext } from "../store/AuthContext";
+import axios from "axios";
 
 const Navbar = () => {
-  const history = useHistory();
   const { setAuthData, auth } = useContext(authContext);
-  const logoutHandler = () => {
-    setAuthData(null);
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("userData");
-    history.push("/login");
+  const [, setError] = useState("");
+  const logoutHandler = async () => {
+    try {
+      await axios.get("/auth/logout");
+      setAuthData(null);
+    } catch (error) {
+      setError(error.response.data.error);
+    }
   };
-
+  //
   return (
     <nav>
       <div className="nav-wrapper">
         <span className="logo">Login Paradise</span>
         {auth.data ? (
           <div className="nav-links">
-            <Link to="/" onClick={logoutHandler}>
+            <Link to="/login" onClick={logoutHandler}>
               Log out
             </Link>
           </div>

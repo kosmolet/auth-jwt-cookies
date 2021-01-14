@@ -8,29 +8,28 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { setAuthData } = useContext(authContext);
+  const { auth, setAuthData, fetchUserDate } = useContext(authContext);
 
   useEffect(() => {
-    if (localStorage.getItem("authToken")) {
+    if (auth.data) {
       history.replace("/");
     }
-  }, [history]);
+  }, [auth, history]);
 
   const loginHandler = async (e) => {
     e.preventDefault();
     setError("");
     try {
       const { data } = await axios.post("/auth/login", { email, password });
-
-      localStorage.setItem("authToken", data.token);
-
       setAuthData({
-        id: data.user._id,
-        username: data.user.username,
-        email: data.user.email,
+        data: {
+          id: data.user._id,
+          username: data.user.username,
+          email: data.user.email,
+        },
       });
 
-      history.replace("/");
+      fetchUserDate();
     } catch (error) {
       setError(error.response.data.error);
     }

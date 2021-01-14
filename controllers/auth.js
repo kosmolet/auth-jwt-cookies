@@ -1,8 +1,6 @@
 const crypto = require("crypto");
 const User = require("../models/User");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = process.env;
+const sendVerifyEmail = require("../utils/sendMail");
 
 const maxAge = 3 * 24 * 60 * 60;
 
@@ -61,8 +59,16 @@ exports.login = async (req, res) => {
     }
 
     const token = user.getSignedJwtToken();
-    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(200).json({ success: true, user });
+
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      maxAge: maxAge * 1000,
+    });
+
+    res.status(200).json({
+      success: true,
+      user: { _id: user._id, username: user.username, email: user.email },
+    });
   } catch (err) {
     return res.status(500).json({ success: false, error: err.message });
   }
@@ -142,4 +148,11 @@ exports.resetPassword = async (req, res) => {
       error: err.message,
     });
   }
+};
+
+module.exports.logout = (req, res) => {
+  res.clearCookie("jwt");
+  res.status(201).json({
+    success: true,
+  });
 };

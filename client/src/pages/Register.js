@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
+import { authContext } from "../store/AuthContext";
 
 const Register = () => {
   const history = useHistory();
@@ -9,12 +10,13 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const { auth } = useContext(authContext);
 
   useEffect(() => {
-    if (localStorage.getItem("authToken")) {
-      history.push("/");
+    if (auth.data) {
+      history.replace("/");
     }
-  }, [history]);
+  }, [auth, history]);
 
   const registrationHandler = async (e) => {
     e.preventDefault();

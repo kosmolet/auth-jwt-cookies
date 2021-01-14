@@ -3,7 +3,6 @@ import ResetPassword from "./pages/ResetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-// import Navbar from "./components/Navbar";
 import AuthProvider from "./store/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import Home from "./pages/Home";
@@ -13,7 +12,6 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="App">
-          {/* <Navbar /> */}
           <Switch>
             <PrivateRoute exact path="/" component={Home} />
             <Route exact path="/register" component={Register} />
