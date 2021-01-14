@@ -1,25 +1,28 @@
 # Authentication using JWT + HttpOnly Cookies, Node.js + React client
 
+#### Register/Login/ResetPassword/ForgotPassword/Emailing  
+
 ### Set up
 `.env` file should be created in the root directory, example:    
- `NODE_ENV=development`  
-`PORT=5091`  
-`JWT_SECRET=26f54e5849ff849c64ahir6f5sdsdhi394016b351ba7af4df304bf287270`  
-`MONGO_URI='you_mongo_connection string here`  
+ `NODE_ENV=development`    
+`PORT=5091`    
+`JWT_SECRET=26f54e5849ff849c64ahir6f5sdsdhi394016b351ba7af4df304bf287270`    
+`JWT_EXPIRE=1hr`   
+`DOMAIN=http://localhost:3000`    
+`MONGO_URI='you_mongo_connection string here`    
+`EMAIL_FROM=aaaaaa@gmail.com`  
+`SGTEMPLATE_RESET_PASSWORD=d-cbXXXX`  
+`SENDGRID_API_KEY=SG.XXXX` 
+
+To use Postmark for emails sending:  
+`POSTMARK_SERVER_API_TOKEN=XXXX75-XXXX-XXX-XXX-5566XXXXd24`  
+`PSTMK_TEMPLATE_ID_RESET_PASS=11111`  
   One of ways how to generate JWT_SECRET:   
   * launch the REPL (Node shell): open command prompt or terminal and enter `node`,
   * type and enter `require('crypto').randomBytes(36).toString('hex')` 
+ 
+
 ### Start  
 
-Type `npm run dev` in the command prompt or terminal
+Run `npm run dev` in the terminal
 
-### Test  
-
-The easy way to test this API is:
-* Install RESTClient extention in VSCode,
-* Open requests folder and navigate to `auth.rest file`  
-`@BASE_URL=http://localhost:{{$dotenv PORT}}/api/v1` is the base route of API, PORT will be auto-detected from .env file
-* Register a new user by executing (clicking Send Request) above the `POST {{BASE_URL}}/auth/register request`
-* Copy a token which will be shown in the Response window  
-* Navigate to events.rest file and replace `@TOKEN` value with your tocken  
-* To execute requests with `EVENT_ID` first make a POST request and replace `@EVENT_ID` value with your event ID
